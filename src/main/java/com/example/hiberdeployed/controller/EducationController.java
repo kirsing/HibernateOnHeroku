@@ -2,7 +2,9 @@ package com.example.hiberdeployed.controller;
 
 
 import com.example.hiberdeployed.model.Student;
+import com.example.hiberdeployed.model.University;
 import com.example.hiberdeployed.service.StudentService;
+//import com.example.hiberdeployed.service.UniversityService;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,6 +15,7 @@ import java.util.List;
 @AllArgsConstructor
 public class EducationController {
         StudentService studentService;
+//        UniversityService universityService;
 
         @GetMapping("/students")
         public List<Student> getAllStudents() {
@@ -23,6 +26,23 @@ public class EducationController {
                 studentService.createStudent(student);
                 return "You created a student";
         }
-
+//        @GetMapping("/universities")
+//        public List<University> getAllUniversities() {
+//                return  universityService.getAllUniversities();
+//        }
+//
+//        @PostMapping("/universities/create")
+//        public String createUniversity(@RequestBody University university) {
+//                universityService.createUniversity(university);
+//                return "You created a student";
+//        }
+//        @DeleteMapping("/students/delete/{studentId}")
+//        public void deleteStudentById(@PathVariable int studentId) {
+//                studentService.deleteStudentById(studentId);
+//        }
+//        @DeleteMapping("/universities/delete/{universityId}")
+//        public void deleteUniversityById(@PathVariable int universityId) {
+//                universityService.deleteUniversityById(universityId);
+//        }
 
 }

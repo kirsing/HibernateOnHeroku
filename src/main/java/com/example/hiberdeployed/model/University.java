@@ -1,6 +1,7 @@
 package com.example.hiberdeployed.model;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -16,15 +17,16 @@ import java.util.List;
 @Entity
 public class University {
     @Id
-    @GeneratedValue
-    private int id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int universityId;
 
     private String name;
 
     private short departments;
 
     @OneToMany (mappedBy = "university", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Student> studentList = new ArrayList<>();
+    @JsonIgnore
+    private List<Student> studentList;
 
 
 
