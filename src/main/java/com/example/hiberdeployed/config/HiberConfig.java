@@ -24,10 +24,12 @@ public class HiberConfig {
     public DataSource getDataSource() {
         DataSourceBuilder dataSourceBuilder = DataSourceBuilder.create();
         dataSourceBuilder.driverClassName("org.postgresql.Driver");
-        dataSourceBuilder.url("jdbc:mysql://eu-cdbr-west-02.cleardb.net/heroku_18b24e95552a849?reconnect=true");
-        dataSourceBuilder.username("beecf4f9962b5b");
-        dataSourceBuilder.password("94f86852");
+        dataSourceBuilder.url("jdbc:postgresql://ec2-52-212-228-71.eu-west-1.compute.amazonaws.com:5432/d51iv7kf4108o2");
+        dataSourceBuilder.username("nfhqdhdqmxwgtg");
+        dataSourceBuilder.password("e99090e03cb20241f227b674b482541f419dc97e2dbdc0e9d3f0761e00683930");
         return dataSourceBuilder.build();
+
+        //postgres://nfhqdhdqmxwgtg:e99090e03cb20241f227b674b482541f419dc97e2dbdc0e9d3f0761e00683930@ec2-52-212-228-71.eu-west-1.compute.amazonaws.com:5432/d51iv7kf4108o2
     }
     public Properties additionalProperties() {
         Properties properties = new Properties();
