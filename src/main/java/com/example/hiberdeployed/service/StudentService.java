@@ -28,21 +28,21 @@ public class StudentService {
                 .createQuery("FROM Student", Student.class)
                 .getResultList();
     }
-//    @Transactional
-//    public Student getStudentById(int id) {
-//        return sessionFactory.getCurrentSession()
-//                .createQuery("FROM Student s where s.id = :id", Student.class)
-//                .getSingleResult();
-//    }
-//    @Transactional
-//    public void deleteStudentById(int id) {
-//        Student student = getStudentById(id);
-//        sessionFactory.getCurrentSession()
-//                .remove(student);
-//    }
-//    @Transactional
-//    public void updateStudent(Student newStudent, int id) {
-//        sessionFactory.getCurrentSession()
-//                .save(newStudent);
-//    }
+    @Transactional
+    public Student getStudentById(int id) {
+        return sessionFactory.getCurrentSession()
+                .createQuery("FROM Student s where s.id = :id", Student.class)
+                .getSingleResult();
+    }
+    @Transactional
+    public void deleteStudentById(int id) {
+        Student student = getStudentById(id);
+        sessionFactory.getCurrentSession()
+                .remove(student);
+    }
+    @Transactional
+    public void updateStudent(Student newStudent, int id) {
+        sessionFactory.getCurrentSession()
+                .save(newStudent);
+    }
 }
