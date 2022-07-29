@@ -8,6 +8,9 @@ import org.hibernate.SessionFactory;
 import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
 import javax.transaction.Transactional;
 import java.util.List;
 
@@ -45,5 +48,16 @@ public class UniversityService {
     public void updateUniversity(University newUniversity) {
         sessionFactory.getCurrentSession()
                 .save(newUniversity);
+    }
+    @Transactional
+    public Short getSumOfDepartments() {
+        CriteriaBuilder criteriaBuilder = sessionFactory.openSession()
+                .getCriteriaBuilder();
+        CriteriaQuery<Short> criteriaQuery = criteriaBuilder.createQuery(Short.class);
+        Root<University> universityRoot = criteriaQuery.from(University.class);
+        criteriaQuery.select(criteriaBuilder.sum(universityRoot.get("departments")));
+        return sessionFactory.getCurrentSession()
+                .createQuery(criteriaQuery)
+                .getSingleResult();
     }
 }

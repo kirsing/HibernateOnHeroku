@@ -52,6 +52,6 @@ public class EducationController {
 
         @GetMapping("/criteria/sumofdepartments")
         public Short getSumOfDepartments() {
-                return studentService.getSumOfDepartments();
+                return universityService.getSumOfDepartments();
         }
 }

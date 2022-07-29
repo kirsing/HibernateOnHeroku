@@ -65,15 +65,5 @@ public class StudentService {
         return session.createQuery(criteriaQuery).getResultList();
     }
 
-    @Transactional
-    public Short getSumOfDepartments() {
-        CriteriaBuilder criteriaBuilder = sessionFactory.openSession()
-                .getCriteriaBuilder();
-        CriteriaQuery<Short> criteriaQuery = criteriaBuilder.createQuery(Short.class);
-        Root<University> universityRoot = criteriaQuery.from(University.class);
-        criteriaQuery.select(criteriaBuilder.sum(universityRoot.get("departments")));
-        return sessionFactory.getCurrentSession()
-                .createQuery(criteriaQuery)
-                .getSingleResult();
-    }
+
 }
