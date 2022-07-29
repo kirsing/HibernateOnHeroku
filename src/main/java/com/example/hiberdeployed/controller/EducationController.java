@@ -45,5 +45,13 @@ public class EducationController {
         public void deleteUniversityById(@PathVariable int universityId) {
                 universityService.deleteUniversityById(universityId);
         }
+        @GetMapping("/criteria/names")
+        public List<String> getCriteriaStudentsNames() {
+                return studentService.getCriteriaStudentNames();
+        }
 
+        @GetMapping("/criteria/sumofdepartments")
+        public Short getSumOfDepartments() {
+                return studentService.getSumOfDepartments();
+        }
 }
