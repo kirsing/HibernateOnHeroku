@@ -22,7 +22,7 @@ public class UniversityService {
 
     @Transactional
     public University createUniversity(University university) {
-        sessionFactory.getCurrentSession().persist(university);
+        sessionFactory.getCurrentSession().save(university);
         return university;
     }
 

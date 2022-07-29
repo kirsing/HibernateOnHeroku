@@ -35,7 +35,7 @@ public class EducationController {
         @PostMapping("/universities/create")
         public String createUniversity(@RequestBody University university) {
                 universityService.createUniversity(university);
-                return "You created a student";
+                return "You created a university";
         }
         @DeleteMapping("/students/delete/{studentId}")
         public void deleteStudentById(@PathVariable int studentId) {
