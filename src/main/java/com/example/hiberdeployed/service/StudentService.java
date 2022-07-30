@@ -2,19 +2,26 @@ package com.example.hiberdeployed.service;
 
 import com.example.hiberdeployed.model.Student;
 import com.example.hiberdeployed.model.University;
+import com.example.hiberdeployed.repository.StudentRepository;
 import lombok.AllArgsConstructor;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
+import org.springframework.data.jpa.repository.Modifying;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.persistence.Entity;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.CriteriaUpdate;
 import javax.persistence.criteria.Root;
 
 import java.util.List;
@@ -42,6 +49,7 @@ public class StudentService {
     public Student getStudentById(int id) {
         return sessionFactory.getCurrentSession()
                 .createQuery("FROM Student s where s.id = :id", Student.class)
+                .setParameter("id", id)
                 .getSingleResult();
     }
     @Transactional
@@ -52,9 +60,13 @@ public class StudentService {
     }
     @Transactional
     public void updateStudent(Student newStudent, int id) {
+       Student studentOld = sessionFactory.getCurrentSession()
+        .get(Student.class, id);
+        studentOld.setFirstName(newStudent.getFirstName());
         sessionFactory.getCurrentSession()
-                .save(newStudent);
+                .saveOrUpdate(newStudent);
     }
+
 
 
     public List<String> getCriteriaStudentNames() {

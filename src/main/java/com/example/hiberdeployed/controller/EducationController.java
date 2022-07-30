@@ -6,7 +6,13 @@ import com.example.hiberdeployed.model.University;
 import com.example.hiberdeployed.service.StudentService;
 //import com.example.hiberdeployed.service.UniversityService;
 import com.example.hiberdeployed.service.UniversityService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import lombok.AllArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -18,6 +24,15 @@ public class EducationController {
         StudentService studentService;
         UniversityService universityService;
 
+        @Operation(summary = "Get all students")
+        @ApiResponses(value = {
+                @ApiResponse(responseCode = "200", description = "Found the student",
+                        content = { @Content(mediaType = "application/json",
+                                schema = @Schema(implementation = Student.class)) }),
+                @ApiResponse(responseCode = "400", description = "Invalid supplied",
+                        content = @Content),
+                @ApiResponse(responseCode = "404", description = "Student not found",
+                        content = @Content) })
         @GetMapping("/students")
         public List<Student> getAllStudents() {
               return  studentService.getAllStudents();
@@ -45,6 +60,12 @@ public class EducationController {
         public void deleteUniversityById(@PathVariable int universityId) {
                 universityService.deleteUniversityById(universityId);
         }
+        @GetMapping("/students/get/{studentId}")
+        public Student getStudentById(@PathVariable int studentId) {
+                return studentService.getStudentById(studentId);
+        }
+
+
         @GetMapping("/criteria/names")
         public List<String> getCriteriaStudentsNames() {
                 return studentService.getCriteriaStudentNames();
@@ -53,5 +74,10 @@ public class EducationController {
         @GetMapping("/criteria/sumofdepartments")
         public Short getSumOfDepartments() {
                 return universityService.getSumOfDepartments();
+        }
+
+        @PutMapping("/criteria/update/{studentId}")
+        public String updateStudent(@PathVariable int studentId, @RequestBody Student student) {
+                return "Updated";
         }
 }
