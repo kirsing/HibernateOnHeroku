@@ -40,7 +40,7 @@ public class HiberConfig {
         Properties properties = new Properties();
         properties.setProperty("hibernate.hbm2ddl.auto", "update");
         properties.setProperty("hibernate.dialect", "org.hibernate.dialect.PostgreSQL95Dialect");
-        properties.setProperty("hibernate.current_session_context_class", "org.springframework.orm.hibernate5.SpringSessionContext");
+        properties.setProperty("hibernate.current_session_contextf_class", "org.springframework.orm.hibernate5.SpringSessionContext");
         return properties;
     }
 
@@ -69,5 +69,6 @@ public class HiberConfig {
         HibernateTransactionManager transactionManager = new HibernateTransactionManager(factory);
         return transactionManager;
     }
+
 
 }

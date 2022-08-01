@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 
 @Entity
 @Data
@@ -18,6 +19,16 @@ public class Student {
     private String firstName;
 
     private String lastName;
+
+    @Enumerated(EnumType.STRING)
+    private Day day1;
+
+    @Enumerated(EnumType.ORDINAL)
+    private Day day2;
+
+    @Embedded
+    private Address address;
+
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "university_id")
