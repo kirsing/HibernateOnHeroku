@@ -24,17 +24,15 @@ import java.util.Properties;
 @EnableTransactionManagement
 public class HiberConfig {
 
-
-    //@Bean // ставится над методом который выводит класс, объект этого класса создаётся и хранится в Spring Application
     public DataSource getDataSource() {
         DataSourceBuilder dataSourceBuilder = DataSourceBuilder.create();
         dataSourceBuilder.driverClassName("org.postgresql.Driver");
-        dataSourceBuilder.url("jdbc:postgresql://ec2-52-212-228-71.eu-west-1.compute.amazonaws.com:5432/d51iv7kf4108o2");
-        dataSourceBuilder.username("nfhqdhdqmxwgtg");
-        dataSourceBuilder.password("e99090e03cb20241f227b674b482541f419dc97e2dbdc0e9d3f0761e00683930");
+        dataSourceBuilder.url("jdbc:postgresql://ec2-34-253-119-24.eu-west-1.compute.amazonaws.com:5432/d9tsb909urijm9");
+        dataSourceBuilder.username("roowjqdsrxjusn");
+        dataSourceBuilder.password("066df34f14b04aeced2a14ce6539ca0276388ddfeb6d2fcd90d7392b599cba9d");
         return dataSourceBuilder.build();
 
-        //postgres://nfhqdhdqmxwgtg:e99090e03cb20241f227b674b482541f419dc97e2dbdc0e9d3f0761e00683930@ec2-52-212-228-71.eu-west-1.compute.amazonaws.com:5432/d51iv7kf4108o2
+
     }
     public Properties additionalProperties() {
         Properties properties = new Properties();
@@ -44,16 +42,6 @@ public class HiberConfig {
         return properties;
     }
 
-    //        @Bean
-//        public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
-//            LocalContainerEntityManagerFactoryBean emfb = new LocalContainerEntityManagerFactoryBean() ;
-//            emfb.setDataSource(getDataSource());
-//            emfb.setPackagesToScan("com.example.car.model");
-//            emfb.setJpaProperties(additionalProperties());
-//            JpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter() ;
-//            emfb.setJpaVendorAdapter(vendorAdapter);
-//            return emfb ;
-//        }
     @Bean
     public SessionFactory getSessionFactory() throws IOException {
         LocalSessionFactoryBean factoryBean = new LocalSessionFactoryBean();
@@ -69,6 +57,5 @@ public class HiberConfig {
         HibernateTransactionManager transactionManager = new HibernateTransactionManager(factory);
         return transactionManager;
     }
-
 
 }

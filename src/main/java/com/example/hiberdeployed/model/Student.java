@@ -20,11 +20,14 @@ public class Student {
 
     private String lastName;
 
-    @Enumerated(EnumType.STRING)
-    private Day day1;
+//    @Enumerated(EnumType.STRING)
+//    private Day day1;
+//
+//    @Enumerated(EnumType.ORDINAL)
+//    private Day day2;
 
-    @Enumerated(EnumType.ORDINAL)
-    private Day day2;
+    @Enumerated(EnumType.STRING)
+    private Department department;
 
     @Embedded
     private Address address;

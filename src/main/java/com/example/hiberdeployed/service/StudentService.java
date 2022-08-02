@@ -1,6 +1,8 @@
 package com.example.hiberdeployed.service;
 
+import com.example.hiberdeployed.model.Department;
 import com.example.hiberdeployed.model.Student;
+import com.example.hiberdeployed.repository.StudentRepository;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import org.hibernate.SessionFactory;
@@ -25,11 +27,13 @@ import java.util.Optional;
 @NoArgsConstructor
 public class StudentService {
 
-
+@Autowired
     SessionFactory sessionFactory;
+
 @PersistenceContext
     EntityManager entityManager;
 
+StudentRepository studentRepository;
 
 
 
@@ -85,6 +89,26 @@ public class StudentService {
         criteriaQuery.select(houseRoot.get("firstName"));
         return entityManager.createQuery(criteriaQuery).getResultList();
     }
+    @Transactional
+    public List<Student> getStudentsByDepartment(Department department) {
+       return sessionFactory.getCurrentSession()
+               .createQuery("from Student where department = :department", Student.class)
+               .setParameter("department", department)
+               .getResultList();
+    }
+    public List<Student> getStudentsByDepartmentJPQL(Department department) {
+        return entityManager.createQuery("from Student where department = :department", Student.class)
+                .setParameter("department", department)
+                .getResultList();
+    }
+    @Transactional
+    public List<Student> getStudentsByCountry(String country) {
+        return entityManager.createNativeQuery("SELECT * FROM student where country =:country", Student.class)
+                .setParameter("country",country)
+//                .setParameter(1,id)   // вместо двоеточия в запросе - вопросительный знак 1
+                .getResultList();
+    }
+
 
 
 //    public List<String> getCriteriaStudentNames() {

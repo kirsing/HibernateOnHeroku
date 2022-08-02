@@ -2,6 +2,7 @@ package com.example.hiberdeployed.controller;
 
 
 import com.example.hiberdeployed.model.Day;
+import com.example.hiberdeployed.model.Department;
 import com.example.hiberdeployed.model.Student;
 import com.example.hiberdeployed.model.University;
 import com.example.hiberdeployed.service.StudentService;
@@ -84,7 +85,7 @@ public class EducationController {
                         content = @Content(mediaType = "application/json", schema = @Schema(implementation = Student.class)))})
         @GetMapping("/students/{studentId}")
         public ResponseEntity<Student> getStudentById(@PathVariable int studentId) {
-               return studentService.getStudentById(studentId);
+                return studentService.getStudentById(studentId);
         }
 
 
@@ -104,16 +105,34 @@ public class EducationController {
                 return "Updated";
         }
 
-        @GetMapping("/enum")
-        public Student getEnums(@RequestParam("day1") Day day1, @RequestParam("day2") Day day2) {
-                Student student = new Student();
-                student.setDay1(day1);
-                student.setDay2(day2);
-                return studentService.createStudent(student);
-        }
-  @GetMapping("/sort")
-      public List<String> getSorted() {
-              return studentService.getCriteriaStudentNames();
-       }
+//        @GetMapping("/enum")
+//        public Student getEnums(@RequestParam("day1") Day day1, @RequestParam("day2") Day day2) {
+//                Student student = new Student();
+//                student.setDay1(day1);
+//                student.setDay2(day2);
+//                return studentService.createStudent(student);
+//        }
 
-}
+
+        @GetMapping("/enum")
+        public Student getEnums(@RequestParam("department") Department department) {
+                Student student = new Student();
+                student.setDepartment(department);
+
+                return studentService.createStudent(student);
+//        }
+        }
+        @GetMapping("/getbyenumh")
+                        public List<Student> getStudentsByDepartments(@RequestParam("department") Department department) {
+                        return studentService.getStudentsByDepartment(department);
+                }
+        @GetMapping("/getbyenumsjpa")
+        public List<Student> getStudentsByDepartmentsJPQL(@RequestParam("department") Department department) {
+                return studentService.getStudentsByDepartmentJPQL(department);
+        }
+        @GetMapping("/getstudentsBycountry")
+        public List<Student> getStudentsByCountry(@RequestParam("country") String country) {
+                return studentService.getStudentsByCountry(country);
+        }
+        }
+
