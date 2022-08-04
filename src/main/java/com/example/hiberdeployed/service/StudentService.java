@@ -108,6 +108,11 @@ StudentRepository studentRepository;
 //                .setParameter(1,id)   // вместо двоеточия в запросе - вопросительный знак 1
                 .getResultList();
     }
+    public List<Student> getStudentsByCountryJPQL(String country) {
+        return entityManager.createQuery("from Student where country = :country", Student.class)
+                .setParameter("country", country)
+                .getResultList();
+    }
 
 
 

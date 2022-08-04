@@ -134,5 +134,9 @@ public class EducationController {
         public List<Student> getStudentsByCountry(@RequestParam("country") String country) {
                 return studentService.getStudentsByCountry(country);
         }
+        @GetMapping("/getstudentsBycountryJpql")
+        public List<Student> getStudentsByCountryJPQL(@RequestParam("country") String country) {
+                return studentService.getStudentsByCountryJPQL(country);
+        }
         }
 
